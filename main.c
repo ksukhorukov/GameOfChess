@@ -22,15 +22,15 @@ void print_matrix(int array[N][N]) {
 }
 
 int check_horizontal(int i, int array[N][N]) {
-  printf("checking %d horiznotal\n", i);
+  // printf("checking %d horiznotal\n", i);
 
   for(int k = 1; k < N; k++) {
-    printf("%d ", array[i][k]);
+    // printf("%d ", array[i][k]);
     if(array[i][k] == 1) {
       return 0;
     }
   }
-  printf("\n");
+  // printf("\n");
   return 1;
 }
 
@@ -43,7 +43,7 @@ void check_horizontal_info(int i, int array[N][N]) {
 }
 
 int check_vertical(int j, int array[N][N]) {
-  printf("checking %d vertical\n", j);
+  // printf("checking %d vertical\n", j);
 
   int counter = 0;
   for(int i = 0; i < N; i++) {
@@ -56,7 +56,7 @@ int check_vertical(int j, int array[N][N]) {
 
   return 0;
 
-  printf("\n");
+  // printf("\n");
 }
 
 void check_vertical_info(int j, int array[N][N]) {
@@ -88,10 +88,10 @@ int check_north_west_to_south_east_diagonal(int i, int j, int array[N][N]) {
   }
 
   if(counter == 1) {
-    printf("check_north_west_to_south_east_diagonal positive\n");
+    // printf("check_north_west_to_south_east_diagonal positive\n");
     return 1;
   } 
-  printf("check_north_west_to_south_east_diagonal negative\n");
+  // printf("check_north_west_to_south_east_diagonal negative\n");
   return 0;
 }
 
@@ -115,10 +115,10 @@ int check_north_east_to_south_west_diagonal(int i, int j, int array[N][N]) {
   }
 
   if(counter == 1) {
-    printf("check_north_east_to_south_west_diagonal positive\n");
+    // printf("check_north_east_to_south_west_diagonal positive\n");
     return 1;
   } 
-  printf("check_north_east_to_south_west_diagonal negative\n");
+  // printf("check_north_east_to_south_west_diagonal negative\n");
   return 0;
 }
 
@@ -165,32 +165,28 @@ int check_matrix(int array[N][N]) {
   int tmp_old_var = 0; 
 
   for(int i = 0; i < N; i++) {
-      int j = 0;
+    int j = 0;
 
-      if(i + 1 >= N) {
+    if(i + 1 >= N) {
+      continue;
+    }
+
+    int swp =  matrix[i + 1][j];
+
+    matrix[i][j] = matrix[i + 1][j];
+    matrix[i + 1][j] = swp; 
+
+    for(int j = 0; j < N; j++) {      
+      if((j + 1) >= N) {
         continue;
       }
 
-      tmp_swp_var = matrix[i][j];
-      tmp_old_var = matrix[i + 1][j];
+      int swp =  matrix[i][j];
 
-      matrix[i][j] = tmp_old_var;
-      matrix[i + 1][j] = tmp_swp_var;
+      matrix[i][j] = matrix[i][j + 1];
+      matrix[i][j + 1] = swp; 
 
-    for(int j = 0; j < N; j++) {
-      // matrix[i, j], matrix[i, j + 1] = matrix[i, j + 1], matrix[i, j];
-      int k = j;
-      if((k + 1) >= N) {
-        continue;
-      }
-
-      tmp_swp_var = matrix[i][k];
-      tmp_old_var = matrix[i][k + 1];
-
-      matrix[i][k] = tmp_old_var;
-      matrix[i][k + 1] = tmp_swp_var;
-
-      result &= check_diagonals(i, k, array) & check_horizontal(i, array) & check_vertical(k, array); 
+      result &= check_diagonals(i, j, array) & check_horizontal(i, array) & check_vertical(j, array); 
 
       if(result == 1) {
         printf("\nNew result found:\n");
