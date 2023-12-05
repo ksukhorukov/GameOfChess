@@ -24,9 +24,9 @@ void print_matrix(int array[N][N]) {
 int check_horizontal(int i, int array[N][N]) {
   printf("checking %d horiznotal\n", i);
 
-  for(int k = 0; k < N; k++) {
+  for(int k = 1; k < N; k++) {
     printf("%d ", array[i][k]);
-    if(array[i][k] == 1 && k != i) {
+    if(array[i][k] == 1) {
       return 0;
     }
   }
@@ -135,27 +135,27 @@ void main(int argc, char** argv) {
         0 0 0 0 0 0 0 0 
 */
 
-  print_matrix(matrix);
+//   print_matrix(matrix);
 
-  check_vertical_info(0, matrix);
-  print_matrix(matrix);
+//   check_vertical_info(0, matrix);
+//   print_matrix(matrix);
 
-/*
-        0 1 1 1 1 1 1 1 
-        1 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-*/
+// /*
+//         0 1 1 1 1 1 1 1 
+//         1 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+// */
 
-  matrix[0][0] = 0;
-  matrix[1][0] = 1;
+//   matrix[0][0] = 0;
+//   matrix[1][0] = 1;
 
-  print_matrix(matrix);
+//   print_matrix(matrix);
 
-  check_vertical_info(1, matrix);
+//   check_vertical_info(1, matrix);
 
 }
