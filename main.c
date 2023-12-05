@@ -147,8 +147,60 @@ void check_diagonals_info(int i, int j, int array[N][N]) {
   }
 }
 
-int check_matrix(int i, int j, int array[N][N]) {
-  return check_diagonals(i, j, array) & check_horizontal(i, array) & check_vertical(j, array);
+int check_matrix(int array[N][N]) {
+  /*
+        0 1 1 1 0 1 1 1 
+        1 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 1 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+*/
+
+  int result = 1;
+
+  int tmp_swp_var = 0;
+  int tmp_old_var = 0; 
+
+  for(int i = 0; i < N; i++) {
+      int j = 0;
+
+      if(i + 1 >= N) {
+        continue;
+      }
+
+      tmp_swp_var = matrix[i][j];
+      tmp_old_var = matrix[i + 1][j];
+
+      matrix[i][j] = tmp_old_var;
+      matrix[i + 1][j] = tmp_swp_var;
+
+    for(int j = 0; j < N; j++) {
+      // matrix[i, j], matrix[i, j + 1] = matrix[i, j + 1], matrix[i, j];
+      int k = j;
+      if((k + 1) >= N) {
+        continue;
+      }
+
+      tmp_swp_var = matrix[i][k];
+      tmp_old_var = matrix[i][k + 1];
+
+      matrix[i][k] = tmp_old_var;
+      matrix[i][k + 1] = tmp_swp_var;
+
+      result &= check_diagonals(i, k, array) & check_horizontal(i, array) & check_vertical(k, array); 
+
+      if(result == 1) {
+        printf("\nNew result found:\n");
+        print_matrix(array);
+        printf("\n\n");
+      }   
+    }
+  }
+
+  return result;
 }
 
 void main(int argc, char** argv) {
@@ -164,116 +216,120 @@ void main(int argc, char** argv) {
     }    
   }
 
-/*
-        1 1 1 1 1 1 1 1 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-*/
+  check_matrix(matrix);
 
-  print_matrix(matrix);
+// /*
+//         1 1 1 1 1 1 1 1 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+// */
 
-  check_horizontal_info(0, matrix);
+//   print_matrix(matrix);
 
-/*
-        0 1 1 1 1 1 1 1 
-        1 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-*/
+//   check_horizontal_info(0, matrix);
 
-  matrix[0][0] = 0;
-  matrix[1][0] = 1;
+// /*
+//         0 1 1 1 1 1 1 1 
+//         1 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+// */
 
-  print_matrix(matrix);
+//   matrix[0][0] = 0;
+//   matrix[1][0] = 1;
 
-  check_horizontal_info(1, matrix);
+//   print_matrix(matrix);
 
-/*
-        1 1 1 1 1 1 1 1 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-*/
+//   check_horizontal_info(1, matrix);
 
-  print_matrix(matrix);
+// /*
+//         1 1 1 1 1 1 1 1 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+// */
 
-  check_vertical_info(0, matrix);
-  print_matrix(matrix);
+//   print_matrix(matrix);
 
-/*
-        0 1 1 1 1 1 1 1 
-        1 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-*/
+//   check_vertical_info(0, matrix);
+//   print_matrix(matrix);
 
-  matrix[0][0] = 0;
-  matrix[1][0] = 1;
+// /*
+//         0 1 1 1 1 1 1 1 
+//         1 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+// */
 
-  print_matrix(matrix);
+//   matrix[0][0] = 0;
+//   matrix[1][0] = 1;
 
-  check_vertical_info(1, matrix);
+//   print_matrix(matrix);
+
+//   check_vertical_info(1, matrix);
 
   
-  matrix[0][1] = 1;
-  matrix[1][1] = 1;
+//   matrix[0][1] = 1;
+//   matrix[1][1] = 1;
 
-  check_vertical_info(1, matrix);
+//   check_vertical_info(1, matrix);
 
-  /*
-        0 1 1 1 0 1 1 1 
-        1 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 1 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-*/
+//   /*
+//         0 1 1 1 0 1 1 1 
+//         1 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 1 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+// */
 
-  matrix[3][4] = 1;
+//   matrix[3][4] = 1;
 
-  check_diagonals_info(3, 4, matrix);
+//   check_diagonals_info(3, 4, matrix);
 
-/*
-        0 1 1 1 0 1 1 1 
-        1 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 1 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 0 0 
-        0 0 0 0 0 0 1 0 
-        0 0 0 0 0 0 0 0 
-*/
+// /*
+//         0 1 1 1 0 1 1 1 
+//         1 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 1 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 0 0 
+//         0 0 0 0 0 0 1 0 
+//         0 0 0 0 0 0 0 0 
+// */
   
-  for(int i = 0; i < N; i++) {
-    for(int j = 0; j < N; j++) {
-      if(i == 0) {
-        matrix[0][j] = 1;  
-      } else {
-        matrix[i][j] = 0;
-      }
-    }    
-  }
+//   for(int i = 0; i < N; i++) {
+//     for(int j = 0; j < N; j++) {
+//       if(i == 0) {
+//         matrix[0][j] = 1;  
+//       } else {
+//         matrix[i][j] = 0;
+//       }
+//     }    
+//   }
 
-  matrix[6][6] = 1;
+//   matrix[6][6] = 1;
 
-  check_diagonals_info(6, 6, matrix);
+//   check_diagonals_info(6, 6, matrix);
+
+
 }
