@@ -22,13 +22,24 @@ void print_matrix(int array[N][N]) {
 }
 
 int check_horizontal(int i, int array[N][N]) {
+  printf("checking %d horiznotal\n", i);
+
   for(int k = 0; k < N; k++) {
-    if(array[i][k] == 1) {
-      return 0;
+    printf("%d ", array[i][k]);
+    if(array[i][k] == 1 && k != i) {
+      continue;
     }
   }
-
+  printf("\n");
   return 1;
+}
+
+void check_horizontal_info(int i, int array[N][N]) {
+  if(check_horizontal(i, matrix) == TRUE) {
+    printf("positive horiznotal\n");
+  } else {
+    printf("negative horiznotal\n");
+  }
 }
 
 int check_vertical(int i, int array[N][N]) {
@@ -82,9 +93,24 @@ void main(int argc, char** argv) {
 
   print_matrix(matrix);
 
-  if(check_horizontal(0, matrix) == TRUE) {
-    printf("positive horiznotal\n");
-  } else {
-    printf("negative horiznotal\n");
-  }
+  check_horizontal_info(0, matrix);
+
+/*
+        0 1 1 1 1 1 1 1 
+        1 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+*/
+
+  matrix[0][0] = 0;
+  matrix[1][0] = 1;
+
+  print_matrix(matrix);
+
+  check_horizontal_info(1, matrix);
+
 }
