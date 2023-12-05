@@ -69,17 +69,29 @@ void check_vertical_info(int j, int array[N][N]) {
 
 
 int check_north_west_to_south_east_diagonal(int i, int j, int array[N][N]) {
+/*
+        0 1 1 1 0 1 1 1 
+        1 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 1 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+*/
+
   int counter = 0;
   int m = j;
 
-  for(int k = 0; k < N; k++) {
-    counter = counter + array[k][m];
-    m = m + 1;
+  for(int k = 0; k < N && m < N; k++, m++) {
+    counter += array[k][m];
   }
 
   if(counter == 1) {
+    printf("check_north_west_to_south_east_diagonal positive\n");
     return 1;
   } 
+  printf("check_north_west_to_south_east_diagonal negative\n");
   return 0;
 }
 
@@ -96,16 +108,17 @@ int check_north_east_to_south_west_diagonal(int i, int j, int array[N][N]) {
 */
 
   int counter = 0;
-  int m = N;
+  int m = N - 1;
 
-  for(int k = 0; k < N; k++) {
-    counter = counter + array[k][m];
-    m = m - 1;
+  for(int k = 0; k < N && m >= 0; k++, m--) {
+    counter += array[k][m];
   }
 
   if(counter == 1) {
+    printf("check_north_east_to_south_west_diagonal positive\n");
     return 1;
   } 
+  printf("check_north_east_to_south_west_diagonal negative\n");
   return 0;
 }
 
@@ -126,6 +139,7 @@ int check_diagonals(int i, int j, int array[N][N]) {
 }
 
 void check_diagonals_info(int i, int j, int array[N][N]) {
+  printf("checking diagonal %d %d = %d\n", i, j, array[i][j]);
   if(check_diagonals(i, j, matrix) == TRUE) {
     printf("positive diagonal\n");
   } else {
@@ -222,4 +236,19 @@ void main(int argc, char** argv) {
   matrix[1][1] = 1;
 
   check_vertical_info(1, matrix);
+
+  /*
+        0 1 1 1 0 1 1 1 
+        1 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 1 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+*/
+
+  matrix[3][4] = 1;
+
+  check_diagonals_info(3, 4, matrix);
 }
