@@ -52,9 +52,9 @@ int check_vertical(int j, int array[N][N]) {
 
   if(counter == 1) {
     return 1;  
-  } else {
-    return 0;
-  }
+  } 
+
+  return 0;
 
   printf("\n");
 }
@@ -67,16 +67,45 @@ void check_vertical_info(int j, int array[N][N]) {
   }
 }
 
-int check_diagonals(int i, int j, int array[N][N]) {
-  // for(int k = 0; k < N; k++) {
-  //   if(array[i][k] == 1) {
-  //     return 0;
-  //   }
-  // }
 
-  return 1;
+int check_north_west_to_south_east_diagonal(int i, int j, int array[N][N]) {
+  int counter = 0;
+  int m = j;
+
+  for(int k = 0; k < N; k++) {
+    counter = counter + array[k][m];
+    m = m + 1;
+  }
+
+  if(counter == 1) {
+    return 1;
+  } 
+  return 0;
 }
 
+int check_diagonals(int i, int j, int array[N][N]) {
+
+  /*
+        0 1 1 1 0 1 1 1 
+        1 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 1 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+*/
+
+  return check_north_west_to_south_east_diagonal(i, j, array);
+}
+
+void check_diagonals_info(int i, int j, int array[N][N]) {
+  if(check_diagonals(i, j, matrix) == TRUE) {
+    printf("positive diagonal\n");
+  } else {
+    printf("negative diagonal\n");
+  }
+}
 
 int check_matrix(int i, int j, int array[N][N]) {
   return check_diagonals(i, j, array) & check_horizontal(i, array) & check_vertical(j, array);
