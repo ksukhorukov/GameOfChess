@@ -83,6 +83,32 @@ int check_north_west_to_south_east_diagonal(int i, int j, int array[N][N]) {
   return 0;
 }
 
+int check_north_east_to_south_west_diagonal(int i, int j, int array[N][N]) {
+  /*
+        0 1 1 1 0 1 1 1 
+        1 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 1 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+*/
+
+  int counter = 0;
+  int m = N;
+
+  for(int k = 0; k < N; k++) {
+    counter = counter + array[k][m];
+    m = m - 1;
+  }
+
+  if(counter == 1) {
+    return 1;
+  } 
+  return 0;
+}
+
 int check_diagonals(int i, int j, int array[N][N]) {
 
   /*
@@ -96,7 +122,7 @@ int check_diagonals(int i, int j, int array[N][N]) {
         0 0 0 0 0 0 0 0 
 */
 
-  return check_north_west_to_south_east_diagonal(i, j, array);
+  return check_north_west_to_south_east_diagonal(i, j, array) && check_north_east_to_south_west_diagonal(i, j, array);
 }
 
 void check_diagonals_info(int i, int j, int array[N][N]) {
