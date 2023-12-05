@@ -147,7 +147,31 @@ void check_diagonals_info(int i, int j, int array[N][N]) {
   }
 }
 
-int check_matrix(int array[N][N]) {
+void display_total_bruted(int bruted) {
+  printf("Total bruted: %d\n", bruted);
+};
+
+void display_result(int r) {
+  printf("Result: %d\n", r);
+}
+
+void init_matrix() {
+  /* inint matrix */
+  
+  for(int l = 0; l < N; l++) {
+    for(int m = 0; m < N; m++) {
+      if(l == 0) {
+        matrix[0][m] = 1;  
+      } else {
+        matrix[l][m] = 0;
+      }
+    }    
+  }
+
+  /* end of initiation */
+}
+
+void check_matrix(int array[N][N]) {
   /*
         0 1 1 1 0 1 1 1 
         1 0 0 0 0 0 0 0 
@@ -161,54 +185,48 @@ int check_matrix(int array[N][N]) {
 
   int result = 1;
 
+  int i = 0;
   int j = 0;
-  
-  for(int i = 0; i < N - 1; i++) {
-    result &= check_diagonals(i, j, array) & check_horizontal(i, array) & check_vertical(j, array); 
+  int k = 0;  
+  int bruted = 0;
 
-    if(result == 1) {
-      printf("\nNew result found:\n");
-      print_matrix(array);
-      printf("\n\n");
-    }  
+  for(k = 0; k < N; k++) { 
+    init_matrix();
+    for(i = 0; i < N; i++) {
 
-    print_matrix(matrix);
+        if((k - 1) > 0) {
+          matrix[k - 1][j] = 0;
+        } else {
+          matrix[k][j] = 0;
+        }
 
-    matrix[i][j] = 0;
-    matrix[i + 1][j] = 1;
+        matrix[k + 1][j] = 1;
 
-    for(j; j < N - 1; j++) { 
-      printf("j: %d\n", j);
+        print_matrix(matrix);
 
-      // matrix[i][j] = 0;
-      // matrix[i][j + 1] = 1;
 
-      // result &= check_diagonals(i, j, array) & check_horizontal(i, array) & check_vertical(j, array); 
+      for(j = 0; j < N; j++) { 
+        result &= check_diagonals(i, j, matrix) && check_horizontal(i, matrix) && check_vertical(j, matrix); 
+        bruted++;
+        display_total_bruted(bruted);
+        
+        if(result == 1) {
+          printf("\nNew result found:\n");
+          print_matrix(matrix);
+          printf("\n\n");
+        } 
+        
+        result = 1;
+        
+      }
 
-      // if(result == 1) {
-      //   printf("\nNew result found:\n");
-      //   print_matrix(array);
-      //   printf("\n\n");
-      // }   
+      j = 0;
     }
+    init_matrix();
   }
-
-  return result;
 }
 
 void main(int argc, char** argv) {
-  /* inint matrix */
-  
-  for(int i = 0; i < N; i++) {
-    for(int j = 0; j < N; j++) {
-      if(i == 0) {
-        matrix[0][j] = 1;  
-      } else {
-        matrix[i][j] = 0;
-      }
-    }    
-  }
-
   check_matrix(matrix);
 
 // /*
