@@ -45,18 +45,22 @@ void check_horizontal_info(int i, int array[N][N]) {
 int check_vertical(int j, int array[N][N]) {
   printf("checking %d vertical\n", j);
 
+  int counter = 0;
   for(int i = 0; i < N; i++) {
-    printf("%d ", array[i][j]);
-    if(array[i][j] == 1 && j != i) {
-      return 0;
-    }
+    counter = counter + array[i][j];
   }
+
+  if(counter == 1) {
+    return 1;  
+  } else {
+    return 0;
+  }
+
   printf("\n");
-  return 1;
 }
 
-void check_vertical_info(int i, int array[N][N]) {
-  if(check_vertical(i, matrix) == TRUE) {
+void check_vertical_info(int j, int array[N][N]) {
+  if(check_vertical(j, matrix) == TRUE) {
     printf("positive vertical\n");
   } else {
     printf("negative vertical\n");
@@ -135,27 +139,32 @@ void main(int argc, char** argv) {
         0 0 0 0 0 0 0 0 
 */
 
-//   print_matrix(matrix);
+  print_matrix(matrix);
 
-//   check_vertical_info(0, matrix);
-//   print_matrix(matrix);
+  check_vertical_info(0, matrix);
+  print_matrix(matrix);
 
-// /*
-//         0 1 1 1 1 1 1 1 
-//         1 0 0 0 0 0 0 0 
-//         0 0 0 0 0 0 0 0 
-//         0 0 0 0 0 0 0 0 
-//         0 0 0 0 0 0 0 0 
-//         0 0 0 0 0 0 0 0 
-//         0 0 0 0 0 0 0 0 
-//         0 0 0 0 0 0 0 0 
-// */
+/*
+        0 1 1 1 1 1 1 1 
+        1 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+*/
 
-//   matrix[0][0] = 0;
-//   matrix[1][0] = 1;
+  matrix[0][0] = 0;
+  matrix[1][0] = 1;
 
-//   print_matrix(matrix);
+  print_matrix(matrix);
 
-//   check_vertical_info(1, matrix);
+  check_vertical_info(1, matrix);
 
+  
+  matrix[0][1] = 1;
+  matrix[1][1] = 1;
+
+  check_vertical_info(1, matrix);
 }
