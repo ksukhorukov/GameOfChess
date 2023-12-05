@@ -251,4 +251,29 @@ void main(int argc, char** argv) {
   matrix[3][4] = 1;
 
   check_diagonals_info(3, 4, matrix);
+
+/*
+        0 1 1 1 0 1 1 1 
+        1 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 1 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 0 0 
+        0 0 0 0 0 0 1 0 
+        0 0 0 0 0 0 0 0 
+*/
+  
+  for(int i = 0; i < N; i++) {
+    for(int j = 0; j < N; j++) {
+      if(i == 0) {
+        matrix[0][j] = 1;  
+      } else {
+        matrix[i][j] = 0;
+      }
+    }    
+  }
+
+  matrix[6][6] = 1;
+
+  check_diagonals_info(6, 6, matrix);
 }
