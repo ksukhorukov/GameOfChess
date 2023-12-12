@@ -14,20 +14,22 @@ void system_error(char *msg) {
 }
 
 void print_matrix() {
+  printf("\n");
   for(int i = 0; i < N; i++) {
     for(int j = 0; j < N; j++) {
       printf("%d ", matrix[i][j]);
     }
     printf("\n");
   }
+  printf("\n");
 }
 
 int check_horizontal(int i) {
   // printf("checking %d horiznotal\n", i);
 
-  for(int k = 1; k < N; k++) {
+  for(int k = 0; k < N; k++) {
     // printf("%d ", matrix[i][k]);
-    if(matrix[i][k] == 1) {
+    if(matrix[i][k] == 1 && k != i) {
       return 0;
     }
   }
@@ -43,7 +45,7 @@ void check_horizontal_info(int i) {
   }
 }
 
-int check_vertical(int j, int matrix[N][N]) {
+int check_vertical(int j) {
   // printf("checking %d vertical\n", j);
 
   int counter = 0;
@@ -61,7 +63,7 @@ int check_vertical(int j, int matrix[N][N]) {
 }
 
 void check_vertical_info(int j) {
-  if(check_vertical(j, matrix) == TRUE) {
+  if(check_vertical(j) == TRUE) {
     printf("positive vertical\n");
   } else {
     printf("negative vertical\n");
@@ -169,39 +171,37 @@ void init_matrix() {
 }
 
 int check_matrix(int matrix[N][N]) {
-  int result = 1;
-
-  int k, l, m, p, counter = 0;  
+  int k, l, p, counter, result = 0;  
 
   bruted = 0;
 
   init_matrix();
 
   for(k = 0; k < N; k++) { 
-    for(l = 0; l < N; l++) {
+    result = 1 && check_horizontal(k);
+    for(p = 0; p < N; p++) {
       if((k - 1) > 0) {
-        matrix[k - 1][l] = 0;
+        matrix[k - 1][p] = 0;
       } else {
-        matrix[k][l] = 0;
+        matrix[0][p] = 0;
       }
 
-      matrix[k + 1][l] = 1;
+      matrix[k][p] = 1;
 
-      for(m = 0; m < N; m++) {
-        for(p = 0; p < N; p++) {
-          result &= check_vertical(m, matrix); 
-          bruted++;
+      result = result && check_vertical(k);
 
-          if(result == 1) {
-            counter++;
-            printf("\nNew result found:\n");
-            print_matrix();
-            printf("\n\n");
-          } 
-        
-          result = 0;
-        }
-      }
+      bruted++;
+
+      if(result == 1) {
+        counter++;
+        // printf("\nNew result found:\n");
+        // print_matrix();
+        // printf("\n\n");
+      } 
+    
+      result = 1;
+
+      print_matrix();
     }
   }
 
