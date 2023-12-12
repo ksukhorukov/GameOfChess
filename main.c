@@ -6,6 +6,7 @@ const int TRUE = 1;
 const int FALSE = 0;
 
 int matrix[N][N];
+int bruted;
 
 void system_error(char *msg) {
   printf("%s", msg);
@@ -170,13 +171,9 @@ void init_matrix() {
 int check_matrix(int matrix[N][N]) {
   int result = 1;
 
-  int k, l, m, p, bruted, counter = 0;  
+  int k, l, m, p, counter = 0;  
 
-  // int l = 0;
-  // int m = 0;
-  // int p = 0;
-  // int bruted = 0;
-  // int counter = 0;
+  bruted = 0;
 
   init_matrix();
 
@@ -214,7 +211,7 @@ int check_matrix(int matrix[N][N]) {
 int main() {
   int counter = check_matrix(matrix);
 
-  printf("\nResults found: %d\n", counter);
+  printf("\nTotal bruted: %d\nResults found: %d\n", bruted, counter);
 
   return 0;
 }
