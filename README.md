@@ -1,4 +1,4 @@
-# Game Of Chess Problem
+# Game Of Chess Queens Problem
 
 ## Description
 
@@ -25,3 +25,4 @@ $ make
 ```
 $ time ./main
 ```
+
