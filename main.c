@@ -194,15 +194,15 @@ void check_matrix(int array[N][N]) {
     init_matrix();
     for(i = 0; i < N; i++) {
 
-        if((k - 1) > 0) {
-          matrix[k - 1][j] = 0;
-        } else {
-          matrix[k][j] = 0;
-        }
+      if((k - 1) > 0) {
+        matrix[k - 1][j] = 0;
+      } else {
+        matrix[k][j] = 0;
+      }
 
-        matrix[k + 1][j] = 1;
+      matrix[k + 1][j] = 1;
 
-        print_matrix(matrix);
+      print_matrix(matrix);
 
 
       for(j = 0; j < N; j++) { 
