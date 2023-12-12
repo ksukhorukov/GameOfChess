@@ -1,2 +1,2 @@
 build:
-		gcc main.c -o main
+		gcc -W main.c -o main
