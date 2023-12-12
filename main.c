@@ -194,7 +194,6 @@ int check_matrix(int matrix[N][N]) {
         for(p = 0; p < N; p++) {
           result &= check_vertical(m, matrix); 
           bruted++;
-          display_total_bruted(bruted);
 
           if(result == 1) {
             counter++;
