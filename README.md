@@ -10,7 +10,7 @@ diagonals for moves on arbitrary distance.
 
 ## System Requirements
 
-* \*nix-based OS
+* \*nix based OS
 * gcc ANSI C99 compiler version 15.0.0 or higher
 * make utils
 
