@@ -19,3 +19,9 @@ diagonals for moves on arbitrary distance.
 ```
 $ make
 ```
+
+## Usage
+
+```
+$ time ./main
+```
