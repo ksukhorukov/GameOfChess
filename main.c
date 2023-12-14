@@ -171,40 +171,41 @@ void init_matrix() {
 }
 
 int check_matrix(int matrix[N][N]) {
-  int k, l, p, counter, result = 0;  
-
-  bruted = 0;
+  int results = 0;  
+  int counter = 0;
+  int bruted = 0;
 
   init_matrix();
 
-  for(k = 0; k < N; k++) { 
-    for(l = 0; l < N; l++) { 
-      if((l - 1) > 0) {
-        matrix[l - 1][k] = 0;
+  for(int k = 0; k < N; k++) { 
+    for(int l = 0; l < N; l++) { 
+      if(l - 1 >= 0) {
+        matrix[l - 1][k] = 0;  
+        matrix[l][k] = 1;
       } else {
         matrix[l][k] = 0;
+        matrix[l][k + 1] = 1;
       }
 
-      matrix[l][k] = 1;
+      print_matrix();
+      // result = 1 && check_horizontal(l);
 
-      result = 1 && check_horizontal(l);
+      // for(p = 0; p < N; p++) {
+        // result = result && check_vertical(p) && check_diagonals(p);
 
-      for(p = 0; p < N; p++) {
-        result = result && check_vertical(p) && check_diagonals(p);
+        // bruted++;
 
-        bruted++;
-
-        if(result == 1) {
-          counter++;
+        // if(result == 1) {
+        //   counter++;
           // printf("\nNew result found:\n");
           // print_matrix();
           // printf("\n\n");
-        } 
+        // } 
       
-        result = 1;
+        // result = 1;
 
-        print_matrix();
-      }
+        
+      // }
     }
   }
 
