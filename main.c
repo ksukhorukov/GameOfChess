@@ -177,37 +177,34 @@ int check_matrix(int matrix[N][N]) {
 
   init_matrix();
 
+  print_matrix();
+
   for(int k = 0; k < N; k++) { 
     for(int l = 0; l < N; l++) { 
       if(l - 1 >= 0) {
-        matrix[l - 1][k] = 0;  
-        matrix[l][k] = 1;
+        matrix[k - 1][l] = 0;  
+        matrix[k][l] = 1;
       } else {
-        matrix[l][k] = 0;
-        matrix[l][k + 1] = 1;
+        matrix[k][l] = 0;
+        matrix[k][l + 1] = 1;
       }
 
-      print_matrix();
-      // result = 1 && check_horizontal(l);
+      for(int m = 0; m < N; m++) {
+        if(l - 1 >= 0) {
+          matrix[l - 1][m] = 0;  
+          matrix[l][m] = 1;
+        } else {
+          matrix[l][m] = 0;
+          matrix[l][m + 1] = 1;
+        }
 
-      // for(p = 0; p < N; p++) {
-        // result = result && check_vertical(p) && check_diagonals(p);
-
-        // bruted++;
-
-        // if(result == 1) {
-        //   counter++;
-          // printf("\nNew result found:\n");
-          // print_matrix();
-          // printf("\n\n");
-        // } 
-      
-        // result = 1;
-
-        
-      // }
+        print_matrix();
+      }
     }
   }
+     
+  // result = 1 
+  // result = result && check_horizontal(l) && check_vertical(p) && check_diagonals(p);
 
   return counter;
 }
